@@ -1,5 +1,11 @@
 import socket
 import argparse
+import os
+import sys
+
+bob2_protocol_path = os.path.abspath("../Bob2/src/protocol")
+sys.path.append(bob2_protocol_path)
+import bob2_protocol
 
 def start_tcp_server(host, port):
     # Create a TCP/IP socket with IPv6
@@ -13,6 +19,8 @@ def start_tcp_server(host, port):
     server_socket.listen(5)
     print("Waiting for a connection...")
 
+    bob2 = bob2_protocol.Bob2Protocol()
+
     try:
         while True:
             client_socket, client_address = server_socket.accept()
@@ -22,7 +30,11 @@ def start_tcp_server(host, port):
                 data = client_socket.recv(1024)
                 if not data:
                     break
-                print("Received message:", data.decode('utf-8'))
+                try:
+                    message = bob2.parse_message(data)
+                    print("Received message:", message)
+                except ValueError:
+                    print("Checksum validation failed")
             
             client_socket.close()
             print(f"Connection closed for {client_address}")
