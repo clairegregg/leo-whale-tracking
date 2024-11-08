@@ -1,6 +1,10 @@
 # Low-Earth Orbit Satellites for Whale Tracking
 This was completed for the final project of Scalable Computing CS7NS1, to model a use-case for LEO (low earth orbit) satellites.
 
+## Instructions for Use
+
+Set up satellites using https://github.com/Scalable-2024/bobb, then run whales.py with any number of whales to simulate the use case.
+
 ## Use Case
 
 We are modelling the use case of using LEO satellites to help track whales/sharks. The basic idea here is to attach a waterproof LEO antenna to a whale, which can connect to the satellites when the whale breaches (comes above the water), or when they feed close to the surface. A small processor on the whale can collect data from sensors at all times, and whenever the whale comes close to the surface, it can attempt to connect to a LEO satellite as fast as possible, and send as much data as possible.
